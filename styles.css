@@ -1,0 +1,442 @@
+:root {
+            /* Vibrant multi-color gradient */
+            --bg-gradient: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            --mesh-bg: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                       radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                       radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            
+            --primary: #6366f1;     /* Indigo */
+            --primary-light: #818cf8;
+            --accent: #f472b6;      /* Pink */
+            --success: #34d399;
+            
+            --text-main: #1f2937;
+            --text-light: #f9fafb;
+            --text-muted: #6b7280;
+            
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            /* Animated colorful background */
+            background-color: #FA8BFF;
+            background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
+            background-size: 200% 200%;
+            animation: gradientBG 10s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- SPA View Handling --- */
+        .page-view {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .page-view.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- COMPONENT: Calculator --- */
+        .calculator-wrapper {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.8);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .calc-display {
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: var(--radius-md);
+            margin-bottom: 24px;
+            text-align: right;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .calc-history {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            min-height: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .calc-main {
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .key {
+            border: none;
+            padding: 18px;
+            font-size: 1.25rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            background: white;
+            color: var(--text-main);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .key:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .key.op {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .key.clear {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .key.submit {
+            grid-column: span 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+        
+        .key.submit:hover {
+            filter: brightness(1.1);
+        }
+
+        /* --- COMPONENT: Payment Page --- */
+        .payment-wrapper {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .result-badge {
+            background: white;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: inline-block;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .result-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: block;
+            margin-top: 8px;
+        }
+
+        /* Plans Section */
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .plan-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            position: relative;
+            border-top: 6px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .plan-card.active {
+            background: #fff;
+            transform: translateY(-12px);
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.5), var(--shadow-hover);
+        }
+
+        /* Plan Themes */
+        .p-basic { border-color: #38bdf8; }
+        .p-basic .plan-price { color: #0284c7; }
+        .p-basic i { color: #38bdf8; }
+        .p-basic .plan-bg-glow { background: radial-gradient(circle at top right, #38bdf822, transparent 70%); }
+
+        .p-pro { border-color: #a855f7; }
+        .p-pro .plan-price { color: #7e22ce; }
+        .p-pro i { color: #a855f7; }
+        .p-pro .plan-bg-glow { background: radial-gradient(circle at top right, #a855f722, transparent 70%); }
+
+        .p-premium { border-color: #f43f5e; }
+        .p-premium .plan-price { color: #be123c; }
+        .p-premium i { color: #f43f5e; }
+        .p-premium .plan-bg-glow { background: radial-gradient(circle at top right, #f43f5e22, transparent 70%); }
+
+        .plan-bg-glow {
+            position: absolute;
+            top: 0; right: 0; width: 100%; height: 100%;
+            pointer-events: none;
+        }
+
+        .plan-title {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .plan-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+        
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .plan-features {
+            margin-bottom: 24px;
+        }
+
+        .plan-features li {
+            list-style: none;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            color: #374151;
+            font-size: 0.95rem;
+        }
+
+        .plan-features i {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .plan-select-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            background: #f1f5f9;
+            color: var(--text-main);
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .plan-card:hover .plan-select-btn, .plan-card.active .plan-select-btn {
+            background: var(--text-main);
+            color: white;
+        }
+
+        /* --- Payment Card Design (Decorated) --- */
+        .checkout-section {
+            /* Glassmorphism Credit Card Style */
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            
+            /* Dark Card Gradient */
+            background-image: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            display: none;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Decorative circles on payment card */
+        .card-deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+        }
+        .deco-1 { width: 200px; height: 200px; background: #6366f1; top: -50px; left: -50px; opacity: 0.4; }
+        .deco-2 { width: 150px; height: 150px; background: #ec4899; bottom: -30px; right: -30px; opacity: 0.4; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: 0.2s;
+            font-family: 'Courier New', monospace; /* Monospace for card feel */
+        }
+        
+        .input-group input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.15);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.2);
+        }
+
+        .submit-payment {
+            width: 100%;
+            padding: 18px;
+            background: white;
+            color: var(--primary-dark);
+            border: none;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .submit-payment:hover {
+            transform: scale(1.02);
+            background: #f8fafc;
+        }
+
+        /* Loading & Success */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(99, 102, 241, 0.3);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .success-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            background: -webkit-linear-gradient(45deg, #34d399, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+   

@@ -1,0 +1,128 @@
+<div id="view-payment" class="page-view">
+        <div class="payment-wrapper">
+            
+            <!-- Result Banner -->
+            <div class="result-header">
+                <div class="result-badge">Result Ready</div>
+                <span id="payment-result" class="result-number">0.00</span>
+                <p style="color: white; opacity: 0.9; margin-top: 5px;">Unlock the full report by choosing a plan below</p>
+            </div>
+
+            <!-- Plans Grid -->
+            <div class="plans-container">
+                <!-- Basic -->
+                <div class="plan-card p-basic" onclick="app.selectPlan('Basic')">
+                    <div class="plan-bg-glow"></div>
+                    <div class="plan-title">Basic</div>
+                    <div class="plan-desc">For students & casual use.</div>
+                    <div class="plan-price">$1.99<span>/mo</span></div>
+                    <ul class="plan-features">
+                        <li><i class="ph-fill ph-clock-counter-clockwise"></i> Store 20 recent calculations</li>
+                        <li><i class="ph-fill ph-palette"></i> 3 Standard color themes</li>
+                        <li><i class="ph-fill ph-export"></i> Export to simple text file</li>
+                        <li><i class="ph-fill ph-envelope-simple"></i> Standard email support</li>
+                        <li><i class="ph-fill ph-no-ads"></i> Ad-free experience</li>
+                    </ul>
+                    <button class="plan-select-btn">Select Basic</button>
+                </div>
+
+                <!-- Pro -->
+                <div class="plan-card p-pro" onclick="app.selectPlan('Pro')">
+                    <div class="plan-bg-glow"></div>
+                    <div class="plan-title">Pro</div>
+                    <div class="plan-desc">For professionals & engineers.</div>
+                    <div class="plan-price">$4.99<span>/mo</span></div>
+                    <ul class="plan-features">
+                        <li><i class="ph-fill ph-infinity"></i> Unlimited history storage</li>
+                        <li><i class="ph-fill ph-lightning"></i> 2x Faster processing speed</li>
+                        <li><i class="ph-fill ph-paint-brush-broad"></i> 10 Professional themes</li>
+                        <li><i class="ph-fill ph-file-pdf"></i> Export results to PDF</li>
+                        <li><i class="ph-fill ph-star"></i> Priority email support</li>
+                    </ul>
+                    <button class="plan-select-btn">Select Pro</button>
+                </div>
+
+                <!-- Premium -->
+                <div class="plan-card p-premium" onclick="app.selectPlan('Premium')">
+                    <div class="plan-bg-glow"></div>
+                    <div class="plan-title">Premium</div>
+                    <div class="plan-desc">The ultimate calculation suite.</div>
+                    <div class="plan-price">$9.99<span>/mo</span></div>
+                    <ul class="plan-features">
+                        <li><i class="ph-fill ph-cloud-arrow-up"></i> Real-time Cloud Sync</li>
+                        <li><i class="ph-fill ph-users"></i> Team collaboration features</li>
+                        <li><i class="ph-fill ph-crown"></i> Exclusive animated themes</li>
+                        <li><i class="ph-fill ph-chart-line-up"></i> Advanced graphing tools</li>
+                        <li><i class="ph-fill ph-chats-circle"></i> 24/7 VIP Live Chat</li>
+                    </ul>
+                    <button class="plan-select-btn">Select Premium</button>
+                </div>
+            </div>
+
+            <!-- Checkout Form (Under Plans) -->
+            <div id="checkout-form" class="checkout-section">
+                <!-- Decoration -->
+                <div class="card-deco-circle deco-1"></div>
+                <div class="card-deco-circle deco-2"></div>
+                
+                <div class="checkout-header">
+                    <div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 5px;">Payment Details</h3>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">Secure SSL Encrypted Transaction</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span id="plan-name-display" style="color: var(--accent); font-weight: bold; font-size: 1.2rem;">PLAN</span>
+                        <i class="ph-fill ph-lock-key" style="margin-left: 8px; font-size: 1.2rem;"></i>
+                    </div>
+                </div>
+                
+                <form onsubmit="app.processPayment(event)" class="form-grid">
+                    <div class="input-group">
+                        <label>Cardholder Name</label>
+                        <input type="text" placeholder="ALEXANDER SMITH" required style="text-transform: uppercase;">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Card Number</label>
+                        <input type="text" placeholder="4242 4242 4242 4242" maxlength="19" required>
+                        <i class="ph-fill ph-credit-card" style="position: absolute; right: 15px; top: 42px; color: rgba(255,255,255,0.5); font-size: 1.2rem;"></i>
+                    </div>
+
+                    <div class="split-inputs">
+                        <div class="input-group">
+                            <label>Expiry Date</label>
+                            <input type="text" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="input-group">
+                            <label>CVV / CVC</label>
+                            <input type="text" placeholder="123" maxlength="4" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email Receipt</label>
+                        <input type="email" placeholder="you@example.com" required style="font-family: sans-serif;">
+                    </div>
+
+                    <button type="submit" class="submit-payment" id="pay-btn">
+                        <span>Confirm Payment</span>
+                        <div class="spinner"></div>
+                    </button>
+                </form>
+            </div>
+
+            <button onclick="app.reset()" style="display: block; margin: 40px auto; padding: 10px 20px; background: rgba(255,255,255,0.2); border-radius: 20px; border: 1px solid white; color: white; cursor: pointer; backdrop-filter: blur(5px);">
+                &larr; Cancel & Return
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Overlay -->
+    <div id="success-overlay" class="success-overlay">
+        <i class="ph-fill ph-check-circle success-icon"></i>
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px; color: #111827;">Payment Successful</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem;">Your plan has been upgraded instantly.</p>
+        <button onclick="app.reset()" style="padding: 15px 35px; background: var(--text-main); color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 1.1rem; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+            Start New Calculation
+        </button>
+    </div>
